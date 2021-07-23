@@ -2,8 +2,14 @@
 import { Request, Response } from "express";
 import { UserModel } from "../models/user";
 import { JWThelpers } from "../helpers/JWThelpers";
+import { fuctionHelpers } from '../helpers/FuctionHelpers';
+import "dotenv/config";
+
+
+
 
 class UserController {
+    
     public async register(req: Request, res: Response) {
       const { username, email, password, passwordRepeat } = req.body;
       if (!(username || email || password || passwordRepeat)) {
@@ -11,6 +17,11 @@ class UserController {
       }
       if (password !== passwordRepeat){
         return res.status(400).json({ msg: "Passwords do not match" });
+      }
+      if(!(fuctionHelpers.isEmail(email))){
+        return res.status(400).json({
+              msg: "this email is no valid"
+        })
       }
       const user = await UserModel.findOne({ email: email });
       if (user) {
