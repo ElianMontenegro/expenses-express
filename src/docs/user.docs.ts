@@ -48,6 +48,15 @@
  *       type: http
  *       scheme: bearer
  *       bearerFormat: JWT
+ *     google_oauth:    
+ *       type: oauth2
+ *       description: This API uses OAuth 2.
+ *       flows:
+ *          authorizationCode:   
+ *              authorizationUrl: https://api.example.com/oauth2/authorize
+ *              scopes:
+ *                  read_pets: read your pets
+ *                  write_pets: modify pets in your account
  */
 
 /**
