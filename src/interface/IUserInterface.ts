@@ -7,4 +7,5 @@ export interface IUserDocument extends Document {
   role: string;
   password: string;
   phone?: number;
+  type?: string;
 }

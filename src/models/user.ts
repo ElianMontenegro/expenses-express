@@ -31,7 +31,6 @@ const UserSchema = new Schema<IUserModel>(
     },
     password: {
       type: String,
-      required: true,
       minlength: 6,
     },
     phone: {
@@ -40,6 +39,9 @@ const UserSchema = new Schema<IUserModel>(
       unique: true,
       default: 0,
     },
+    googleId : {
+      type: String
+    }
   },
   {
     versionKey: false,

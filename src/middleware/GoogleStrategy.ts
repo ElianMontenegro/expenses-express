@@ -1,31 +1,43 @@
-const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
+const GoogleStrategy = require("passport-google-oauth2").Strategy;
 import passport from "passport";
 import { UserModel } from "../models/user";
-
+import { JWThelpers } from "../helpers/JWThelpers";
 const optsGoogle = {
-    clientID: process.env.GOOGLE_CLIENT_ID!,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL!
+  clientID: process.env.GOOGLE_CLIENT_ID!,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+  callbackURL: process.env.GOOGLE_CALLBACK_URL!,
 };
 
-passport.serializeUser((user, done) => {
-  done(null, user);
-})
-
-passport.deserializeUser((user : any, done)=> {
-  done(null, user);
-})
-
 export default new GoogleStrategy(
-    optsGoogle,
-    (accessToken : String, refreshToken : String, profile : any, done : any) => {
-    // const user = await UserModel.findOne({email: profile.email})
-    // if(!user){
-        
-    // }
-    console.log(profile);
-    
-    return done(null, profile);
-  
+  optsGoogle,
+  async (
+    accessToken: String,
+    refreshToken: String,
+    profile: any,
+    done: any
+  ) => {
+    const newUser = new UserModel({
+          googleId: profile.id,
+          username: profile.given_name + " " + profile.family_name,
+          email: profile.email,
+    });
+    try {
+      const user = await UserModel.findOne({ email: profile.email });
+      if (!user) {
+        const user = await newUser.save();
+        return done(null, user);
+      }
+      return done(null, user);
+    }catch (error) {
+      console.log(error);
+    }   
   }
 );
+
+passport.serializeUser((user : any, done : any) => {
+  console.log(user);
+  
+  done(null, user.id)
+})
+
+

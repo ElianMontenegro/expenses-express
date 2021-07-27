@@ -1,12 +1,9 @@
   
 import { Request, Response } from "express";
-import { UserModel } from "../models/user";
+import { UserModel , IUserModel } from "../models/user";
 import { JWThelpers } from "../helpers/JWThelpers";
 import { fuctionHelpers } from '../helpers/FuctionHelpers';
 import "dotenv/config";
-
-
-
 
 class UserController {
     
@@ -23,6 +20,7 @@ class UserController {
               msg: "this email is no valid"
         })
       }
+
       const user = await UserModel.findOne({ email: email });
       if (user) {
         return res.status(400).json({ msg: "this email already exist" });
@@ -41,6 +39,24 @@ class UserController {
         });
       }
     }
+
+    public loginOauth(req: Request, res: Response){
+      try {
+        if (req.user){
+          const { _id } : any  = req.user;
+          return res.status(201).json({
+            token: JWThelpers.createAccessToken(_id),
+            refreshToken: JWThelpers.createrefreshToken(_id),
+          });
+        }
+        return res.sendStatus(401);
+      } catch (error) {
+        return res.sendStatus(500);
+      }
+      
+      
+    }
+    
 }
 
 export const userController = new UserController();

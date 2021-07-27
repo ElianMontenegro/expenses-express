@@ -19,5 +19,4 @@ passport.use(GoogleStrategy);
 const specs = swaggerJsDoc(option);
 App.use('/docs', swaggerUI.serve , swaggerUI.setup(specs));
 
-
 export default App;

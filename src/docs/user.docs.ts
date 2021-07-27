@@ -53,7 +53,8 @@
  *       description: This API uses OAuth 2.
  *       flows:
  *          authorizationCode:   
- *              authorizationUrl: https://api.example.com/oauth2/authorize
+ *              authorizationUrl: http://localhost:5000/auth/google
+ *              x-tokenName: id_token
  *              scopes:
  *                  read_pets: read your pets
  *                  write_pets: modify pets in your account
@@ -106,6 +107,18 @@
  *      '400':
  *        description: return some problem with fields
  *      '500':
- *        description: return Internal Server Error
+ *       description: return Internal Server Error
  *
+ */
+
+
+/**
+ * @swagger
+ *  /auth/google:
+ *  get:
+ *      commit: this route is for authenticate with google
+ *      Authorization: google_oauth
+ *      securyty:
+ *          $ref: '#components/securitySchemes/bearerAuth'
+ *      tags: [Aouth]
  */
