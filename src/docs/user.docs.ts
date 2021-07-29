@@ -54,10 +54,8 @@
  *       flows:
  *          authorizationCode:   
  *              authorizationUrl: http://localhost:5000/auth/google
- *              x-tokenName: id_token
- *              scopes:
- *                  read_pets: read your pets
- *                  write_pets: modify pets in your account
+ *              tokenUrl: http://localhost:5000/google/callback
+ *              scopes: {}
  */
 
 /**
@@ -119,6 +117,6 @@
  *      commit: this route is for authenticate with google
  *      Authorization: google_oauth
  *      securyty:
- *          $ref: '#components/securitySchemes/bearerAuth'
+ *          $ref: '#components/securitySchemes/google_oauth'
  *      tags: [Aouth]
  */

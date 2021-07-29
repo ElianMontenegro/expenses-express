@@ -41,6 +41,10 @@ const UserSchema = new Schema<IUserModel>(
     },
     googleId : {
       type: String
+    },
+    budget : {
+      type: Number,
+      default: 0
     }
   },
   {
@@ -62,4 +66,4 @@ UserSchema.methods.comparePassword = async function comparePassword(data) {
   return await bcrypt.compare(data, this.password);
 };
 
-export let UserModel = model<IUserModel>("user", UserSchema, "users", true);
+export let UserModel = model<IUserModel>("user", UserSchema, "user", true);
