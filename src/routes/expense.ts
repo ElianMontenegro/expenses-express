@@ -8,5 +8,24 @@ routeExpense.post('/expense',
     exprensesController.createExpense
     );
 
+routeExpense.get('/expense',
+    JWThelpers.authorizationToken, 
+    exprensesController.getAllExpenses
+    );
+
+routeExpense.get('/expense/:id',
+    JWThelpers.authorizationToken, 
+    exprensesController.getExpensesByUser
+    );
+
+routeExpense.delete('/expense/:id',
+    JWThelpers.authorizationToken,
+    exprensesController.deleteExpense
+    );
+
+routeExpense.put('/expense/:id',
+    JWThelpers.authorizationToken,
+    exprensesController.updateExpense
+    );
 
 export default module.exports = routeExpense;

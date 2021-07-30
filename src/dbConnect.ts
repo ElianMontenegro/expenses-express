@@ -5,7 +5,8 @@ const uri = `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@clust
 const mongooseOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify : false
 }
 
 mongoose.connect(uri, mongooseOptions)
