@@ -79,9 +79,6 @@
  * /api/register:
  *  post:
  *    summary: here you can register
- *    Authorization: Bearer <token>
- *    securyty:
- *      $ref: '#components/securitySchemes/bearerAuth'
  *    tags: [Aouth]
  *    requestBody:
  *      description: if you want register, write unsername, email and password
@@ -117,6 +114,38 @@
  *       description: return Internal Server Error
  *
  */
+
+/**
+ * @swagger
+ *  /api/login:
+ *      post:
+ *          summary: you can login
+ *          tags: [Aouth]
+ *          requestBody:
+ *              description: if you want login, write the email and password
+ *              required: true
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              email:
+ *                                  type: string
+ *                                  format: email
+ *                              password:
+ *                                  type: string
+ *                                  format: password
+ *          responses:
+ *              '200':
+ *                  description: return access token and refresh token
+ *              '404':
+ *                  description: user not found
+ *              '400':
+ *                  description: fields empty
+ *              '500':
+ *                  description: server error 
+ */
+
 
 
 /**

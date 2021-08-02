@@ -5,6 +5,9 @@ const UserRouter: Router = Router();
 
 UserRouter.route("/api/register").post(userController.register);
 
+UserRouter.route("/api/login").post(userController.login);
+
+//google
 UserRouter.get("/api/google", (req, res) => {
   res.send('<a href="/auth/google">autrhntication</a>');
 });
@@ -21,7 +24,7 @@ UserRouter.get(
   userController.loginOauth
 );
 
-//
+// facebook
 UserRouter.get("/api/facebook", (req, res) => {
   res.send('<a href="/auth/facebook">autrhntication</a>');
 });
