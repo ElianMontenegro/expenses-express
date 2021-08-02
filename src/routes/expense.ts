@@ -9,7 +9,6 @@ routeExpense.post('/expense',
     );
 
 routeExpense.get('/expense',
-    JWThelpers.authorizationToken, 
     exprensesController.getAllExpenses
     );
 

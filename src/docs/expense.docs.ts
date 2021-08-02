@@ -155,3 +155,26 @@
  *          '500': 
  *              description: error server
  */
+
+// GET EXPENSE BY USER
+
+
+/**
+ * @swagger
+ *  /api/expense/{id}:
+ *      get:
+ *          summary: here you can know all the user's expenses
+ *          security:
+ *              - bearerAuth: []
+ *          tags: [Expenses]
+ *          parameters:
+ *              - $ref: '#/components/parameters/expenseId'
+ *          responses:
+ *              '200':
+ *                  description: return expenses
+ *              '404':
+ *                  description: this user dont have expenses
+ *              '500':
+ *                  description: server error              
+ *      
+ */

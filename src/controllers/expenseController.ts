@@ -31,7 +31,7 @@ class ExprensesController {
 
     public async getAllExpenses(req: Request ,res: Response){
         try {
-            const expenses = await ExpenseModel.find()
+            const expenses = await ExpenseModel.find({}, ['title','amount']).populate('user', "username").populate('category', 'name')
             if(!expenses){
                 return res.status(404).json({
                     msg: 'There is not expenses'

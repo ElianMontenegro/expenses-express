@@ -53,8 +53,7 @@ class UserController {
       } catch (error) {
         return res.sendStatus(500);
       }
-      
-      
+
     }
     
 }

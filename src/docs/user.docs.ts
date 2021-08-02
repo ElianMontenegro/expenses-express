@@ -56,6 +56,15 @@
  *              authorizationUrl: http://localhost:5000/auth/google
  *              tokenUrl: http://localhost:5000/google/callback
  *              scopes: {}
+ *     facebook_oauth:    
+ *       type: oauth2
+ *       description: This API uses OAuth 2.
+ *       flows:
+ *          authorizationCode:   
+ *              authorizationUrl: http://localhost:5000/auth/facebook
+ *              tokenUrl: http://localhost:5000/auth/facebook/callback
+ *              scopes: {}    
+ *              
  */
 
 /**
