@@ -20,7 +20,7 @@ class ExprensesController {
         try {
             await expense.save()
             res.status(201).json({
-                msg: 'expense create'
+                expense
             })
         } catch (error) {
             res.status(500).json({

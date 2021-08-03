@@ -32,7 +32,7 @@
  *                  title: today's expense 
  *                  amount: 100
  *                  category : 6101d22e2a4b9365e520d8fa
- *                  user : 6101b519f4abb50194eba22b
+ *                  user : 6108ad0c585a8d153026677d
  *  
  *      parameters:
  *          expenseId:
@@ -69,11 +69,15 @@
  *                      schema: 
  *                          $ref: '#/components/schemas/expense'
  *          responses: 
- *             201:
+ *             '201':
  *              description: the expense was successfully created
- *             401:
+ *              content:
+ *                  application/json:
+ *                      schema: 
+ *                          $ref: '#/components/schemas/expense' 
+ *             '401':
  *              description: Unauthorized
- *             400:
+ *             '400':
  *              description: fields empty
  *                      
  * 

@@ -14,7 +14,7 @@ UserRouter.route("/api/logout").post(JWThelpers.authorizationRefreshToken , user
 
 //google
 UserRouter.get("/api/google", (req, res) => {
-  res.send('<a href="/auth/google">autrhntication</a>');
+  res.send('<a href="/auth/google">authentication</a>');
 });
 
 
@@ -31,7 +31,7 @@ UserRouter.get(
 
 // facebook
 UserRouter.get("/api/facebook", (req, res) => {
-  res.send('<a href="/auth/facebook">autrhntication</a>');
+  res.send('<a href="/auth/facebook">authentication</a>');
 });
 
 UserRouter.get(
@@ -39,10 +39,10 @@ UserRouter.get(
   passport.authenticate("facebook")
 );
 
-
 UserRouter.get(
   "/auth/facebook/callback",
   passport.authenticate("facebook", { session: false }),
   userController.loginOauth
 );
+
 export default module.exports = UserRouter;
