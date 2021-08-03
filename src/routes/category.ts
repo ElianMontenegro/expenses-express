@@ -5,7 +5,7 @@ import { JWThelpers } from '../helpers/JWThelpers';
 
 
 routeCategory.post('/category', 
-    JWThelpers.authorizationToken, 
+    JWThelpers.authorizationAccessToken, 
     categoryController.createCategory
 )
 

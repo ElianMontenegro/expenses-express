@@ -1,11 +1,14 @@
 import { Router } from "express";
 import { userController } from "../controllers/userController";
+import { JWThelpers } from "../helpers/JWThelpers"
 import passport from "passport";
 const UserRouter: Router = Router();
 
 UserRouter.route("/api/register").post(userController.register);
 
 UserRouter.route("/api/login").post(userController.login);
+
+UserRouter.route("/api/refreshToken").post(JWThelpers.authorizationRefreshToken , userController.newAccessToken);
 
 //google
 UserRouter.get("/api/google", (req, res) => {

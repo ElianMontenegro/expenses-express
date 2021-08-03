@@ -4,7 +4,7 @@ import { exprensesController } from '../controllers/expenseController';
 import { JWThelpers } from '../helpers/JWThelpers';
 
 routeExpense.post('/expense',
-    JWThelpers.authorizationToken, 
+    JWThelpers.authorizationAccessToken, 
     exprensesController.createExpense
     );
 
@@ -13,17 +13,17 @@ routeExpense.get('/expense',
     );
 
 routeExpense.get('/expense/:id',
-    JWThelpers.authorizationToken, 
+    JWThelpers.authorizationAccessToken, 
     exprensesController.getExpensesByUser
     );
 
 routeExpense.delete('/expense/:id',
-    JWThelpers.authorizationToken,
+    JWThelpers.authorizationAccessToken,
     exprensesController.deleteExpense
     );
 
 routeExpense.put('/expense/:id',
-    JWThelpers.authorizationToken,
+    JWThelpers.authorizationAccessToken,
     exprensesController.updateExpense
     );
 

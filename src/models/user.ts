@@ -39,8 +39,9 @@ const UserSchema = new Schema<IUserModel>(
       unique: true,
       default: 0,
     },
-    googleId : {
-      type: String
+    tokenVersion: {
+      type: Number,
+      default: 0
     },
     budget : {
       type: Number,

@@ -43,10 +43,13 @@ class UserController {
     public loginOauth(req: Request, res: Response){
       try {
         if (req.user){
-          const { _id } : any  = req.user;
+          console.log(req.user);
+          
+          const { _id , tokenVersion } : any  = req.user;
+          const user : any = { _id, tokenVersion}
           return res.status(201).json({
             token: JWThelpers.createAccessToken(_id),
-            refreshToken: JWThelpers.createrefreshToken(_id),
+            refreshToken: JWThelpers.createrefreshToken(user),
           });
         }
         return res.sendStatus(401);
@@ -56,7 +59,7 @@ class UserController {
 
     }
 
-    public async login (req: Request, res: Response){
+    public async login(req: Request, res: Response){
       const { email, password } = req.body
       if(!(email || password)){
         return res.status(400).json({
@@ -86,6 +89,32 @@ class UserController {
         });
       }
     }
+
+    public async newAccessToken(req: Request, res: Response){
+      try {
+        console.log(req.user);
+        if (!(req.user)){
+          return res.sendStatus(401);
+        }
+        const { id , tokenVersion } : any  = req.user;
+        const user = await UserModel.findOne({ _id: id  });
+        if (!user) {
+          return res.sendStatus(401);
+        }
+
+        if (user.tokenVersion !== tokenVersion) {
+          return res.sendStatus(401);
+        }
+
+        return res.status(200).json({
+          token: JWThelpers.createAccessToken(id),
+        });
+      } catch (error) {
+        return res.sendStatus(500);
+      }
+    }
+
+    
     
 }
 

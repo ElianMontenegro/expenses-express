@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { IUserModel } from "../models/user";
 import { NextFunction, Request, Response } from "express";
+import  { fuctionHelpers } from '../helpers/FuctionHelpers'
 class JWTHelpers {
     public createAccessToken(user: IUserModel) {
         return jwt.sign({ id: user._id }, process.env.JWTSECRET!, {
@@ -12,7 +13,7 @@ class JWTHelpers {
 
     public createrefreshToken(user: IUserModel) {
         return jwt.sign(
-            { id: user._id },
+            { id: user._id, tokenVersion: user.tokenVersion },
             process.env.REFRESHJWTSECRET!,
             {
                 expiresIn: "7d",
@@ -21,27 +22,19 @@ class JWTHelpers {
             }
         );
     }
-
-    public verifyAccessToken(req: Request, res: Response): Response<string> | string {
-        const refreshToken = req.headers["authorization"];
-        const token : string = refreshToken! && refreshToken.split(" ")[1];
-        if (!token || token == null) {
-          return res.status(401).json({
-            msg: "error empty token",
-          });
-        }
-        return token
+    
+    public authorizationAccessToken(req: Request, res: Response, next: NextFunction){
+        const token : any = fuctionHelpers.getToken(req, res)
+        jwt.verify(token, process.env.JWTSECRET!, (err : any , user : any) => {
+            if (err) return res.sendStatus(403)
+            req.user = user
+            next();
+        })
     }
 
-    public authorizationToken(req: Request, res: Response, next: NextFunction){
-        const refreshToken = req.headers["authorization"];
-        const token : string = refreshToken! && refreshToken.split(" ")[1];
-        if (!token || token == null) {
-          return res.status(401).json({
-            msg: "error empty token",
-          });
-        }
-        jwt.verify(token, process.env.JWTSECRET!, (err : any , user : any) => {
+    public authorizationRefreshToken(req: Request, res: Response, next: NextFunction){
+        const token : any = fuctionHelpers.getToken(req, res)
+        jwt.verify(token, process.env.REFRESHJWTSECRET!, (err : any , user : any) => {
             if (err) return res.sendStatus(403)
             req.user = user
             next();

@@ -8,4 +8,5 @@ export interface IUserDocument extends Document {
   password: string;
   phone?: number;
   type?: string;
+  tokenVersion:number;
 }

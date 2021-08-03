@@ -17,9 +17,9 @@ export default new GoogleStrategy(
     done: any
   ) => {
     const newUser = new UserModel({
-          googleId: profile.id,
           username: profile.given_name + " " + profile.family_name,
           email: profile.email,
+          tokenVersion : profile.tokenVersion
     });
     try {
       const user = await UserModel.findOne({ email: profile.email });
