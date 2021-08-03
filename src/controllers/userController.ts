@@ -43,8 +43,6 @@ class UserController {
     public loginOauth(req: Request, res: Response){
       try {
         if (req.user){
-          console.log(req.user);
-          
           const { _id , tokenVersion } : any  = req.user;
           const user : any = { _id, tokenVersion}
           return res.status(201).json({
@@ -92,7 +90,6 @@ class UserController {
 
     public async newAccessToken(req: Request, res: Response){
       try {
-        console.log(req.user);
         if (!(req.user)){
           return res.sendStatus(401);
         }
@@ -107,15 +104,33 @@ class UserController {
         }
 
         return res.status(200).json({
-          token: JWThelpers.createAccessToken(id),
+          token: JWThelpers.createAccessToken(user)
         });
       } catch (error) {
         return res.sendStatus(500);
       }
+    }   
+    
+    public async revokeRefreshTokenByUser(req: Request, res: Response){
+      try {
+        if (!(req.user)){
+          return res.sendStatus(401);
+        }
+        const { id  } : any  = req.user;
+        if (!(await UserModel.updateOne({ _id: id },{ $inc: { tokenVersion: 1 } }))
+        ) {
+          return res.status(401).json({
+            msg: "unauthorized",
+          });
+        }
+        return res.sendStatus(204);
+        
+      } catch (error) {
+        return res.status(500).json({
+          msg: error
+        });
+      }
     }
-
-    
-    
 }
 
 export const userController = new UserController();

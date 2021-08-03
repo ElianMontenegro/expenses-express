@@ -150,21 +150,9 @@
 
 /**
  * @swagger
- *  /auth/google:
- *  get:
- *      commit: this route is for authenticate with google
- *      Authorization: google_oauth
- *      securyty:
- *          $ref: '#components/securitySchemes/google_oauth'
- *      tags: [Aouth]
- */
-
-
-/**
- * @swagger
  *  /api/refreshToken:
  *   post:
- *    summary: here you can get other access token with the refresh token
+ *    summary: here you can get other access token with the refresh token, if token version was modify,then the refresh token will be revoked
  *    security:
  *       - bearerAuth: []
  *    tags: [Aouth]
@@ -179,4 +167,23 @@
  *                      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZGUwNTdhZmQzMjBiMmI5Yzk2ZGE5OSIsImVtYWlsIjoiZWxpYW5tb250ZW5lZ3JvNDkxQGdtYWlsLmNvbSIsImlhdCI6MTYyNjEyMTQzOCwiZXhwIjoxNjI2MjA3ODM4fQ.AgmSJFEbQYZPUAhqJkz03ii1LvQ6dF2P07fcqOX5MWI
  *      '401':
  *        description: UnauthorizedError
+ */
+
+
+
+/**
+ * @swagger
+ *  /api/logout:
+ *   post:
+ *    summary: here you can logged and revoke all the  refresh tokens
+ *    security:
+ *       - bearerAuth: []
+ *    tags: [Aouth]
+ *    responses:
+ *      '204':
+ *         description: revoke token
+ *      '401':
+ *        description: UnauthorizedError
+ *      '500':
+ *        description: error server
  */

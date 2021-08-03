@@ -40,6 +40,8 @@ class JWTHelpers {
             next();
         })
     }
+
+    
 }
 
 export const JWThelpers = new JWTHelpers();

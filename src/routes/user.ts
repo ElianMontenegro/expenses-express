@@ -10,6 +10,8 @@ UserRouter.route("/api/login").post(userController.login);
 
 UserRouter.route("/api/refreshToken").post(JWThelpers.authorizationRefreshToken , userController.newAccessToken);
 
+UserRouter.route("/api/logout").post(JWThelpers.authorizationRefreshToken , userController.revokeRefreshTokenByUser);
+
 //google
 UserRouter.get("/api/google", (req, res) => {
   res.send('<a href="/auth/google">autrhntication</a>');
