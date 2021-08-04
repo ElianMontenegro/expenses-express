@@ -23,6 +23,6 @@ passport.use(GoogleStrategy);
 passport.use(FacebookStrategy);
 
 const specs = swaggerJsDoc(option);
-App.use('/docs', swaggerUI.serve , swaggerUI.setup(specs));
+App.use('/', swaggerUI.serve , swaggerUI.setup(specs));
 
 export default App;
