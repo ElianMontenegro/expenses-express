@@ -11,14 +11,9 @@ export const option = {
           },
 	},
 	servers: [{
-		url: "http://localhost:5000",
-        description: "Local server"	
-	},
-		{
-			url: "https://expenses-express.herokuapp.com/",
-			description: "production server"
-		}
-	]	
+		url: "https://expenses-express.herokuapp.com/",
+		description: "production"
+	}]	
 	},
 	apis: ["./src/docs/*.ts"]
 }
