@@ -53,14 +53,14 @@
  *       description: This API uses OAuth 2.
  *       flows:
  *          authorizationCode:   
- *              authorizationUrl: http://localhost:5000/auth/google
+ *              authorizationUrl: https://expenses-express.herokuapp.com/auth/google
  *              scopes: {}
  *     facebook_oauth:    
  *       type: oauth2
  *       description: This API uses OAuth 2.
  *       flows:
  *          authorizationCode:   
- *              authorizationUrl: http://localhost:5000/auth/facebook
+ *              authorizationUrl: https://expenses-express.herokuapp.com/auth/facebook
  *              scopes: {}    
  *              
  */
