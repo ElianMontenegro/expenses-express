@@ -1,6 +1,7 @@
 import Express from "express";
 import "dotenv/config";
 import "./dbConnect";
+import cors from "cors";
 import UserRouter from "./routes/user";
 import ExpenseRouter from "./routes/expense";
 import CategoryRouter from "./routes/category";
@@ -15,6 +16,14 @@ const App = Express();
 App.set('port', process.env.PORT || 5000)
 App.use(passport.initialize());
 App.use(Express.json());
+
+var corsOptions = {
+    origin: "*",
+    optionsSuccessStatus: 200,
+  };
+App.use(cors(corsOptions));
+
+
 
 App.use("/", UserRouter);
 App.use("/api", ExpenseRouter);
