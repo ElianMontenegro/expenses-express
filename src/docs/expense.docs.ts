@@ -21,9 +21,16 @@
  *                  user: 
  *                      type: string
  *                      description: the user id will go here    
- * 
+ *                  createdAt:
+ *                      type: string
+ *                      format: data-time
+ *                      description: created date
+ *                  updatedAt:
+ *                      type: string
+ *                      format: data-time
+ *                      description: date update, default created date
+
  *              requered:
- *                  - id
  *                  - title
  *                  - amount
  *                  - category
@@ -33,6 +40,8 @@
  *                  amount: 100
  *                  category : 6101d22e2a4b9365e520d8fa
  *                  user : 6108ad0c585a8d153026677d
+ *                  createdAt : 2021-08-06T21:55:48.935+00:00
+ *                  updatedAt : 2021-08-06T21:55:48.935+00:00
  *  
  *      parameters:
  *          expenseId:
@@ -67,7 +76,18 @@
  *              content:
  *                  application/json:
  *                      schema: 
- *                          $ref: '#/components/schemas/expense'
+ *                          type: object
+ *                          properties:
+ *                              title:
+ *                                  type: string
+ *                                  description: expenses name
+ *                              amount:
+ *                                  type: number
+ *                                  description: the amount expense will go here
+ *                              category:
+ *                                  type: string
+ *                                  description : the category id will go here 
+ *                          
  *          responses: 
  *             '201':
  *              description: the expense was successfully created
