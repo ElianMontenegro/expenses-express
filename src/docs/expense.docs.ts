@@ -36,6 +36,7 @@
  *                  - category
  *                  - user
  *              example:
+ *                  _id : 1101d22e2a4b9365e520d8fa
  *                  title: today's expense 
  *                  amount: 100
  *                  category : 6101d22e2a4b9365e520d8fa
@@ -156,6 +157,10 @@
  *      responses:
  *          '200': 
  *              description: expenses updated
+ *              content:
+ *                  application/json:
+ *                      schema: 
+ *                          $ref: '#/components/schemas/expense' 
  *          '404':
  *              description: expenses not founded
  *          '500': 
@@ -196,6 +201,10 @@
  *          responses:
  *              '200':
  *                  description: return expenses
+ *                  content:
+ *                      application/json:
+ *                          schema: 
+ *                              $ref: '#/components/schemas/expense' 
  *              '404':
  *                  description: this user dont have expenses
  *              '500':
