@@ -19,8 +19,9 @@ const ExpenseSchema = new Schema(
             type: Number,
             default : 0
         },
-        category: { type: Schema.Types.ObjectId, ref: "category" },
-        user: { type: Schema.Types.ObjectId, ref: "user" },   
+        category: { type: Schema.Types.ObjectId, ref: "category", required : true },
+        user: { type: Schema.Types.ObjectId, ref: "user", required : true }, 
+         
     },
     {
       versionKey: false,

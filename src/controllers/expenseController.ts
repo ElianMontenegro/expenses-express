@@ -5,18 +5,22 @@ class ExprensesController {
 
     public async createExpense(req: Request ,res: Response) {
         const {  title, amount, category, user } = req.body;
-        if(!(title || amount || category || user)){
+        if(!(title || amount || category)){
             return res.status(400).json({
                 msg: 'fields empty'
             })
         }
-        const existExpense = await ExpenseModel.find({ title : title , user : user})
+        if (!(req.user)){
+            return res.sendStatus(401);
+        }
+        const { id } : any  = req.user;
+        const existExpense = await ExpenseModel.find({ title : title , user : id})
         if(!(existExpense.length == 0)){
             return res.status(400).json({
                 msg: 'this expenses already exists'
             })
         }
-        const expense = new ExpenseModel({ title, amount, category, user })
+        const expense = new ExpenseModel({ title, amount, category, user : id })
         try {
             await expense.save()
             res.status(201).json({
