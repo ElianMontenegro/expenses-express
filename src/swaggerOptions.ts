@@ -13,6 +13,10 @@ export const option = {
 	servers: [{
 		url: "https://expenses-express.herokuapp.com/",
 		description: "production"
+	},
+	{
+		url: "http://localhost:5000/",
+		description: "local"
 	}]	
 	},
 	apis: ["./src/docs/*.ts"]
