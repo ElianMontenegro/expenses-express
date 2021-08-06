@@ -68,9 +68,18 @@ class ExprensesController {
     }
 
     public async deleteExpense(req: Request ,res: Response){
-        const id = req.params.id;
+        const idExpense = req.params.id;
+        if(!idExpense){
+            return res.status(400).json({
+                msg: 'the id expenses is missing'
+            });
+        }
+        if (!(req.user)){
+            return res.sendStatus(401);
+        }
+        const { id } : any  = req.user;
         try {
-            const data = await ExpenseModel.findOneAndDelete(id);
+            const data = await ExpenseModel.findOneAndDelete({user: id , _id : idExpense});
             if (!data) {
                 return res.status(404).json({
                   msg: "expense not  found",
