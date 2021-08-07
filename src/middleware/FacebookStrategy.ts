@@ -15,12 +15,27 @@ export default new FacebookStrategy({
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
   callbackURL: process.env.FACEBOOK_CALLBACK_URL!,
   },
-  (
+  async (
     accessToken: String,
     refreshToken: String,
     profile: any,
     done: any
   ) => {
       console.log(profile);
+      const newUser = new UserModel({
+        username: profile.name,
+        email: profile.email,
+        tokenVersion : profile.tokenVersion
+  });
+  try {
+    const user = await UserModel.findOne({ email: profile.email });
+    if (!user) {
+      const user = await newUser.save();
+      return done(null, user);
+    }
+    return done(null, user);
+  }catch (error) {
+    console.log(error);
+  }   
   }
 );
