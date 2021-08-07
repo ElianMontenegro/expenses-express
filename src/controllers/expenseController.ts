@@ -72,12 +72,12 @@ class ExprensesController {
     }
 
     public async deleteExpense(req: Request ,res: Response){
-        const idExpense = req.params.id;
-        if(!idExpense){
+        if(!(req.params.id)){
             return res.status(400).json({
                 msg: 'the id expenses is missing'
             });
         }
+        const idExpense = req.params.id;
         if (!(req.user)){
             return res.sendStatus(401);
         }

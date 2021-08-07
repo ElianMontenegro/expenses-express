@@ -121,7 +121,9 @@
  *          '204':
  *              description: success delete , dont return any body
  *          '404':
- *              description: not found
+ *              description: expense not found
+ *          '400':
+ *              description: Invalid ID supplied	
  *
  */
 
@@ -162,7 +164,7 @@
  *                      schema: 
  *                          $ref: '#/components/schemas/expense' 
  *          '404':
- *              description: expenses not founded
+ *              description: expense not found
  *          '500': 
  *              description: error server
  */
@@ -180,7 +182,7 @@
  *          '200': 
  *              description: return expenses
  *          '404':
- *              description: expenses not founded
+ *              description: expenses not found
  *          '500': 
  *              description: error server
  */
