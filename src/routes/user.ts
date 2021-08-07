@@ -36,7 +36,7 @@ UserRouter.get("/api/facebook", (req, res) => {
 
 UserRouter.get(
   "/auth/facebook",
-  passport.authenticate("facebook")
+  passport.authenticate("facebook", { scope: ["email", "profile"] })
 );
 
 UserRouter.get(

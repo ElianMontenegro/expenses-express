@@ -23,7 +23,7 @@ export default new FacebookStrategy({
   ) => {
       console.log(profile);
       const newUser = new UserModel({
-        username: profile.name,
+        username: profile.displayName,
         email: profile.email,
         tokenVersion : profile.tokenVersion
   });
