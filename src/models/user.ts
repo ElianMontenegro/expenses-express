@@ -46,6 +46,9 @@ const UserSchema = new Schema<IUserModel>(
     budget : {
       type: Number,
       default: 0
+    },
+    facebookId: {
+      type: String
     }
   },
   {

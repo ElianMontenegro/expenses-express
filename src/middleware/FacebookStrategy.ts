@@ -23,12 +23,13 @@ export default new FacebookStrategy({
   ) => {
       console.log(profile);
       const newUser = new UserModel({
+        facebookId: profile.id,
         username: profile.displayName,
         email: profile.email,
         tokenVersion : profile.tokenVersion
   });
   try {
-    const user = await UserModel.findOne({ email: profile.email });
+    const user = await UserModel.findOne({ facebookId: profile.facebookId });
     if (!user) {
       const user = await newUser.save();
       return done(null, user);
@@ -40,8 +41,4 @@ export default new FacebookStrategy({
   }
 );
 
-passport.serializeUser((user : any, done : any) => {
-  console.log(user);
-  
-  done(null, user.id)
-})
+
