@@ -39,3 +39,9 @@ export default new FacebookStrategy({
   }   
   }
 );
+
+passport.serializeUser((user : any, done : any) => {
+  console.log(user);
+  
+  done(null, user.id)
+})
