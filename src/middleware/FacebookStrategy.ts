@@ -25,7 +25,6 @@ export default new FacebookStrategy({
       const newUser = new UserModel({
         facebookId: profile.id,
         username: profile.displayName,
-        email: profile.email,
         tokenVersion : profile.tokenVersion
   });
   try {
