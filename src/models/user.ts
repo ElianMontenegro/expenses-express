@@ -22,6 +22,7 @@ const UserSchema = new Schema<IUserModel>(
       min: 10,
       max: 320,
       trim: true,
+      required: true
     },
     role: {
       type: String,
@@ -31,6 +32,7 @@ const UserSchema = new Schema<IUserModel>(
     password: {
       type: String,
       minlength: 6,
+      required: true
     },
     phone: {
       type: Number,

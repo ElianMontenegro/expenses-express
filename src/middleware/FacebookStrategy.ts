@@ -1,6 +1,6 @@
 const FacebookStrategy = require("passport-facebook").Strategy;
 import passport from 'passport';
-import { UserModel } from "../models/user";
+import { IUserModel, UserModel } from "../models/user";
 import "dotenv/config";
 
 const optsFacebook = {
@@ -21,8 +21,7 @@ export default new FacebookStrategy({
     profile: any,
     done: any
   ) => {
-      console.log(profile);
-      const newUser = new UserModel({
+      const newUser : IUserModel = new UserModel({
         facebookId: profile.id,
         username: profile.displayName,
         tokenVersion : profile.tokenVersion
