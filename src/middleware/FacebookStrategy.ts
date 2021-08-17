@@ -35,7 +35,7 @@ export default new FacebookStrategy({
     }
     return done(null, user);
   }catch (error) {
-    console.log(error);
+    return console.log(error);
   }   
   }
 );
